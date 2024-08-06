@@ -1,7 +1,8 @@
-package com.commit.campuslist1.dto;
+package com.commit.campus.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,15 +22,34 @@ public class CampingDTO {
     private Double mapY;
     private String tel;
     private String homepage;
-    private Integer staffCnt;
-    private Integer generalSiteCnt;
-    private Integer carSiteCnt;
-    private Integer glampingSiteCnt;
-    private Integer caravanSiteCnt;
-    private Integer personalCaravanSiteCnt;
-    private Long contentId;
+    private int staffCnt;
+    private int generalSiteCnt;
+    private int carSiteCnt;
+    private int glampingSiteCnt;
+    private int caravanSiteCnt;
+    private int personalCaravanSiteCnt;
+    private int contentId;
+    private String supportFacilities;
+    private String outdoorActivities;
+    private String petAccess;
+    private String rentalGearList;
+    private String operationDay;
+    private String firstImageUrl;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
-    // 응답용 필드
-    private List<CampingDTO> campings;  // 캠핑 목록
-    private long total;                 // 캠핑장의 총 개수
+    private int bookmarkCnt;
+    private int reviewCnt;
+
+    private List<CampingFacilitiesDTO> campingFacilities;
+    private CampingStatisticsDTO campingStatistics;  // CampingStatisticsDTO 필드 추가
+
+    // 필드에 대한 getter와 setter 추가
+    public List<CampingFacilitiesDTO> getCampingFacilities() {
+        return campingFacilities;
+    }
+
+    public void setCampingFacilities(List<CampingFacilitiesDTO> campingFacilities) {
+        this.campingFacilities = campingFacilities;
+    }
 }
