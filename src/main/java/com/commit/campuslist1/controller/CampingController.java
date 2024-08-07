@@ -1,7 +1,7 @@
 package com.commit.campuslist1.controller;
 
-import com.commit.campuslist1.dto.CampingDTO;
-import com.commit.campuslist1.service.CampingService;
+import com.commit.campus.dto.CampingDTO;
+import com.commit.campus.service.CampingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +19,9 @@ public class CampingController {
             @RequestParam(required = false) String sigunguName,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "createdDate") String sort,
-            @RequestParam(defaultValue = "desc") String order) {
+            @RequestParam(defaultValue = "createdDate") String sort,  // 정렬 필드 기본값을 등록순으로 설정
+            @RequestParam(defaultValue = "desc") String order) {      // 정렬 순서 기본값을 내림차순으로 설정
         return campingService.getCampings(doName, sigunguName, page, size, sort, order);
     }
 }
+
