@@ -16,7 +16,7 @@ public class Camping {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "campId")
-    private Long campId;
+    private Long campId; // PK 키
 
     private String campName;
     private String lineIntro;
