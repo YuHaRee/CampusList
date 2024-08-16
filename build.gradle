@@ -25,12 +25,8 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    runtimeOnly 'mysql:mysql-connector-java:8.0.32'
-    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-
-    // Lombok
     compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
 
     // AWS SDK for DynamoDB
@@ -39,9 +35,45 @@ dependencies {
     // 테스트 의존성
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
 
+    //Jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // 스프링 시큐리티
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // JWT 토큰
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // OAuth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.security:spring-security-oauth2-jose'
+
+    // json
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+    // Swagger Ui -> springdoc-openapi 사용
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 }
 
+bootRun {
+    jvmArgs = [
+            "-javaagent:${projectDir}/libs/pinpoint-agent/pinpoint-bootstrap-3.0.0.jar",
+            "-Dpinpoint.agentId=${project.name}",
+            "-Dpinpoint.applicationName=${project.name}"
+    ]
+}
+
+tasks.named('bootJar') {
+    mainClass.set('com.commit.camp_reserve.CampReserveApplication')
+}
 tasks.named('test') {
     useJUnitPlatform()
 }
