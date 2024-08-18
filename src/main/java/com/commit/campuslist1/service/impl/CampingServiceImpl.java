@@ -1,9 +1,9 @@
 package com.commit.campuslist1.service.impl;
 
-import com.commit.campuslist1.dto.CampingDTO;
-import com.commit.campuslist1.entity.Camping;
-import com.commit.campuslist1.repository.CampingRepository;
-import com.commit.campuslist1.service.CampingService;
+import com.commit.campus.dto.CampingDTO;
+import com.commit.campus.entity.Camping;
+import com.commit.campus.repository.CampingRepository;
+import com.commit.campus.service.CampingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,34 @@ public class CampingServiceImpl implements CampingService {
 
     @Autowired
     private CampingRepository campingRepository;
+
+    @Override
+    public List<CampingDTO> getAllCampings() {
+        // 모든 캠핑장 정보를 조회하는 실제 구현 (예: 모든 캠핑장 정보를 반환)
+        List<Camping> campings = campingRepository.findAll();
+        return campings.stream().map(camping -> {
+            CampingDTO dto = new CampingDTO();
+            dto.setCampId(camping.getCampId());
+            dto.setCampName(camping.getCampName());
+            // 나머지 필드 설정...
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public CampingDTO createCamping(CampingDTO campingDTO) {
+        // 새로운 캠핑장을 생성하는 실제 구현
+        Camping camping = new Camping();
+        camping.setCampName(campingDTO.getCampName());
+        // 나머지 필드 설정...
+        Camping savedCamping = campingRepository.save(camping);
+
+        CampingDTO dto = new CampingDTO();
+        dto.setCampId(savedCamping.getCampId());
+        dto.setCampName(savedCamping.getCampName());
+        // 나머지 필드 설정...
+        return dto;
+    }
 
     @Override
     public CampingDTO getCampings(String doName, String sigunguName, int page, int size, String sort, String order) {
@@ -63,3 +91,6 @@ public class CampingServiceImpl implements CampingService {
         return responseDto;
     }
 }
+
+
+
